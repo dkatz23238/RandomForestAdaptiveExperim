@@ -1,0 +1,10 @@
+version: '2.1'
+
+services:
+  ax-container:
+    image: ax-container
+    build: .
+    ports:
+      - 3000:3000
+    environment:
+      - N_TRIALS=15
