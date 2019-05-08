@@ -60,7 +60,7 @@ def main(parameters=PARAMETERS):
         objective_name="mean_squared_error",
         minimize=True,
     )
-    N_TRIALS = os.environ.get("N_TRIALS", 15)
+    N_TRIALS = int(os.environ.get("N_TRIALS", 15))
 
     for _ in range(N_TRIALS):
         parameters, trial_index = ax.get_next_trial()
