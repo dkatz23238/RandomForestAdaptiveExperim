@@ -30,11 +30,11 @@ def train_and_return_score(Model= xgb.XGBRegressor, **kwargs):
     model.fit(X_train, y_train)
     rf.fit(X_train, y_train)
     pred_xg = model.predict(X_test)
-    pred_rf = rf.predict(X_test)
-    pred = np.mean([pred_rf, pred_xg], axis=0)
-    _score = mean_squared_error(y_test, pred)
+    # pred_rf = rf.predict(X_test)
+    # pred = np.mean([pred_rf, pred_xg], axis=0)
+    _score = mean_squared_error(y_test, pred_xg)
     # print("MODEL SCORE: %s " % _score)
-    return (1 - model.score(X_test, y_test))
+    return _score
 
 PARAMETERS = [
 
