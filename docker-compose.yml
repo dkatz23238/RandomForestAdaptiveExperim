@@ -1,8 +1,7 @@
-version: '2.1'
+version: '3'
 
 services:
   ax-container:
     image: ax-container
     build: .
-    ports:
-      - 3000:3000
+ 
