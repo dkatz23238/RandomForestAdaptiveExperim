@@ -13,7 +13,7 @@ Note: the data set must be ready to process by an sklearn or xgboost algorithm.
 
 ## Quickstart
 
-Review the enviornment varianles and if needed update the dataset.csv with custom data set. Remember to update the TARGET enviornment variable with the name of the target variable column.
+Review the enviornment variables and if needed update the dataset.csv with custom data set. Remember to update the TARGET enviornment variable with the name of the target variable column.
 
 The following enviornment variables can be used and modifed in docker-compose.yml:
  - N_TRIALS: the amount of trials to run by adaptive experimentation
