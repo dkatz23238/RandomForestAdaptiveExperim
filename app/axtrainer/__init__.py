@@ -2,11 +2,11 @@ from ax.service.ax_client import AxClient
 from ax.utils.measurement.synthetic_functions import branin
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
-from axtrainer.data import DATA_SET
+from axtrainer.data import DATA_SET_DICT
 from ax import ChoiceParameter, ParameterType
 
 from sklearn.metrics import mean_squared_error
-# from axtrainer.trainer import DATA_SET
+# from axtrainer.trainer import DATA_SET_DICT
 import os
 
 
@@ -20,8 +20,8 @@ def make_parameter(name, ptype, bounds, value_type):
 
 def train_and_return_score(Model=RandomForestRegressor, **kwargs):
     ''' Convinience function to train model and return score'''
-    X_train, X_test, y_train, y_test = DATA_SET["X_train"], DATA_SET[
-        "X_test"], DATA_SET["y_train"], DATA_SET["y_test"]
+    X_train, X_test, y_train, y_test = DATA_SET_DICT["X_train"], DATA_SET_DICT[
+        "X_test"], DATA_SET_DICT["y_train"], DATA_SET_DICT["y_test"]
     # Instantiate model with keyword arguments
     model = Model(n_jobs=-1, **kwargs)
     model.fit(X_train, y_train)
@@ -49,7 +49,7 @@ def main(parameters=PARAMETERS):
         objective_name="mean_squared_error",
         minimize=True,
     )
-    N_TRIALS = os.environ.get("N_TRIALS", 30)
+    N_TRIALS = int(os.environ.get("N_TRIALS", 30))
 
     for _ in range(N_TRIALS):
         parameters, trial_index = ax.get_next_trial()
