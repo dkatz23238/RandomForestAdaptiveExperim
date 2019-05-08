@@ -1,2 +1,4 @@
 ax-platform
 sqlalchemy
+haversine
+xgboost

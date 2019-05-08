@@ -17,7 +17,7 @@ WORKDIR /app
 RUN python3 -m pip install --upgrade pip
 # Using pip:
 RUN python3 -m pip install -r requirements.txt
-CMD ["python3", "-u", "run.py"]
+CMD ["python3", "-u","-W", "ignore", "run.py"]
 
 # Using pipenv:
 #RUN python3 -m pip install pipenv

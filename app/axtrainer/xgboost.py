@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.gaussian_process import GaussianProcessRegressor
 from axtrainer.data import DATA_SET
 from ax import ChoiceParameter, ParameterType
+import xgboost as xgb
 
 from sklearn.metrics import mean_squared_error
 # from axtrainer.trainer import DATA_SET
@@ -18,7 +19,7 @@ def make_parameter(name, ptype, bounds, value_type):
         return dict(name=name, type=ptype, values=bounds, value_type=value_type)
 
 
-def train_and_return_score(Model=RandomForestRegressor, **kwargs):
+def train_and_return_score(Model= xgb.XGBRegressor, **kwargs):
     ''' Convinience function to train model and return score'''
     X_train, X_test, y_train, y_test = DATA_SET["X_train"], DATA_SET[
         "X_test"], DATA_SET["y_train"], DATA_SET["y_test"]
@@ -33,8 +34,10 @@ def train_and_return_score(Model=RandomForestRegressor, **kwargs):
 PARAMETERS = [
 
     make_parameter("n_estimators", "range", [0, 300], "int"),
-    make_parameter("bootstrap", "choice", [True, False], "bool"),
-    make_parameter("min_samples_split", "range", [2, 100], "int")
+    make_parameter("alpha", "range", [0,100], "int"),
+    make_parameter("max_depth", "range", [0,10], "int"),
+    make_parameter("learning_rate", "range", [0.01, 0.1], "float"),
+    make_parameter("reg_alpha", "range", [0., 0.9], "float")
 ]
 
 def main(parameters=PARAMETERS):
@@ -59,9 +62,12 @@ def main(parameters=PARAMETERS):
         ax.complete_trial(
             trial_index=trial_index,
             raw_data=train_and_return_score(
-                min_samples_split=parameters["min_samples_split"],
                 n_estimators=parameters["n_estimators"],
-                bootstrap=parameters["bootstrap"]))
+                alpha=parameters["alpha"],
+                max_depth=parameters["max_depth"],
+                learning_rate=parameters["learning_rate"],
+                reg_alpha=parameters["reg_alpha"])
+                )
 
     best_parameters, metrics = ax.get_best_parameters()
-    return best_parameters, metrics
+    return ax, best_parameters, metrics

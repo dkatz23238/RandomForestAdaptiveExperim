@@ -5,9 +5,7 @@ from sklearn.linear_model import Lasso, LinearRegression
 from sklearn.neural_network import MLPRegressor
 from sklearn.metrics import mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
-from pygam import LinearGAM, s, f
 
-import matplotlib.pyplot as plt
 from haversine import haversine
 pd.options.display.max_columns = 999
 
