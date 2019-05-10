@@ -16,8 +16,8 @@ with open(PATH_TO_EXPERIMENT_JSON, encoding="utf-8") as f:
   jsondata = json.loads(f.read())
 
 
-PARAM1 = "w1"
-PARAM2 = "w2"
+PARAM1 = "n_estimators"
+PARAM2 = "learning_rate"
 
 @app.route('/3d')
 def hello(name=None):
