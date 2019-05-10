@@ -4,4 +4,7 @@ services:
   ax-container:
     image: ax-container
     build: .
- 
+    volumes:
+      - ./experiment-results:/app/experiment-results
+    environment:
+      N_TRIALS: 30

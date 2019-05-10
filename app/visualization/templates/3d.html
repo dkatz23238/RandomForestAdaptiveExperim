@@ -1,0 +1,30 @@
+<div id="visualization"></div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vis/4.21.0/vis.js"></script>
+<script type="text/javascript">
+    var myjson = {{ jsondata }};
+    // Create and populate a data table.
+    var data = new vis.DataSet();
+    data.add(myjson)
+    // create some nice looking data with sin/cos    }
+    
+    // specify options
+    var options = {
+        width:  '800px',
+        height: '550px',
+        style: 'dot',
+        showPerspective: true,
+        showGrid: true,
+        showShadow: true,
+        keepAspectRatio: true,
+        verticalRatio: 0.5,
+        xLabel: "log-{{param1}}",
+        yLabel: "log-{{param2}}",
+        zLabel: "log targetScore"
+    };
+    var container = document.getElementById('visualization');
+    var graph3d = new vis.Graph3d(container, data, options);
+    // Instantiate our graph object.
+    console.log(data);
+
+    
+</script>

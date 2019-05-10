@@ -17,6 +17,7 @@ WORKDIR /app
 RUN python3 -m pip install --upgrade pip
 # Using pip:
 RUN python3 -m pip install -r requirements.txt
+RUN python3 -W ignore tests.py
 CMD ["python3", "-u", "-W", "ignore", "run.py"]
 
 # Using pipenv:
